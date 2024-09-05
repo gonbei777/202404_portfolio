@@ -64,6 +64,17 @@
     <?php endwhile; ?>
   <?php endif; ?>
 
+  <!-- ページネーション -->
+  <div>
+    <?php
+    echo paginate_links([
+      'prev_text' => '←',
+      'next_text' => '→',
+    ]);
+
+    ?>
+  </div>
+
 </main>
 
 <?php get_footer(); ?>
