@@ -7,7 +7,8 @@
  */
 function my_theme_support()
 {
-  add_theme_support('post-thumbnails');
+  add_theme_support('post-thumbnails'); //アイキャッチ画像
+  add_theme_support('menus'); //メニュー（ナビゲーション）
 }
 add_action('after_setup_theme', 'my_theme_support');
 
