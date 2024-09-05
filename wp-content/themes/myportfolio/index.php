@@ -5,18 +5,41 @@
   <div>
     <?php if (is_home()): ?>
       <!-- 作品一覧ページ -->
-      <h1>作品一覧</h1>
+      <h1><?= get_the_title(49); ?></h1>
     <?php endif; ?>
 
     <?php if (is_category()): ?>
       <!-- カテゴリ一覧ページ -->
-      <h1>カテゴリ名</h1>
+      <h1><?php single_cat_title(); ?></h1>
     <?php endif; ?>
 
     <?php if (is_date()): ?>
       <!-- 年別一覧ページ -->
-      <h1>2024年</h1>
+      <h1><?php the_time('Y'); ?>年</h1>
     <?php endif; ?>
+
+    <ul>
+      <li>
+        <a href="<?= get_permalink(49); ?>">
+          <?= get_the_title(49); ?>
+        </a>
+      </li>
+
+      <?php
+      wp_list_categories([
+        'title_li' => '',
+      ]);
+      ?>
+    </ul>
+
+    <ul>
+      <?php
+      // 年別アーカイブリンク
+      wp_get_archives([
+        'type' => 'yearly',
+      ]);
+      ?>
+    </ul>
   </div>
 
   <?php if (have_posts()): ?>
