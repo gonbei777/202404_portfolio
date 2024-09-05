@@ -19,6 +19,43 @@
 
       <?php the_content(); ?>
 
+      <!-- 画像１ -->
+      <?php if (get_field('image01')): ?>
+        <div>
+          <?php
+          $img_id = get_field('image01');
+          echo wp_get_attachment_image(
+            $img_id,
+            'full',
+            false,
+            [
+              'style' => 'width: 100%; height: auto;'
+            ]
+          );
+          ?>
+        </div>
+      <?php endif; ?>
+
+      <!-- 画像2 -->
+      <?php if (get_field('image02')): ?>
+        <div>
+          <?php
+          $img_id = get_field('image02');
+          echo wp_get_attachment_image($img_id, 'full');
+          ?>
+        </div>
+      <?php endif; ?>
+
+      <!-- 使用技術 -->
+      <?php if (get_field('tech')): ?>
+        <ul>
+          <?php foreach (get_field('tech') as $tech): ?>
+            <li><?= $tech; ?></li>
+          <?php endforeach; ?>
+        </ul>
+      <?php endif; ?>
+
+
       <?php if (get_next_post_link()): ?>
         <div><?php next_post_link(); ?></div>
       <?php endif; ?>
