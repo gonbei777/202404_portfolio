@@ -51,3 +51,34 @@ function my_enqueue_scripts()
   );
 }
 add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+
+// カスタム投稿タイプ（テスト）
+function my_register_post_type_test()
+{
+  register_post_type('test', [
+    'public' => true,
+    'label' => 'テスト',
+    'show_in_rest' => true, //REST APIとブロックエディタの有効化
+    'has_archive' => true, // アーカイブページを持つかどうか
+    'supports' => ['title', 'editor', 'thumbnail'], // サポートする機能
+    'rewrite' => ['slug' => 'test'], // スラッグ
+    'taxonomies' => ['category', 'post_tag'],
+  ]);
+}
+add_action('init', 'my_register_post_type_test');
+
+function custom_post_type_archive($query)
+{
+  if (is_admin() || ! $query->is_main_query()) {
+    return;
+  }
+  $query->set(
+    'post_type',
+    array_merge(
+      ['post'],
+      ['test'],
+    )
+  );
+}
+add_action('pre_get_posts', 'custom_post_type_archive');
